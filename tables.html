@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hot Restaurant</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  
 </head>
 <body>
     <div class="container">
@@ -31,6 +34,19 @@
 						<h4 class="panel-title">Current Reservations</h4>
 					</div>
 					<div class="panel-body" id="tableSection">
+						<div class="card-body">
+							<ul id="tableList" class="list-group">
+								<!-- <li class="list-group-item mt-4">
+									<h2>Table #1</h2><hr>
+									<h2>ID: 87899992387</h2>
+									<h2>Name: steph</h2>
+									<h2>Email: dsk@jklfs.com</h2>
+									<h2>Phone: 2156677899</h2>
+								</li> -->
+								
+							</ul>	
+						</div>
+						
 					</div>
 				</div>
 
@@ -54,5 +70,42 @@
 	    </footer>
 
 	</div>
+	<script>
+		function displaygifInfo() {
+	
+	var queryURL = "/api/tables/";
+	// Creating an AJAX call for the specific gif button being clicked
+	$.ajax({
+	  url: queryURL,
+	  method: "GET"
+	}).then(function(data) {
+
+	var dataCount = 0;
+	console.log(data);
+	  for (var i = 0; i < data.length; i++) {
+		dataCount++;
+		
+		// Creating and storing a div tag
+		var dataDiv = $("<div id=newData-" + dataCount + ">");
+
+		// Creating a paragraph tag with the result item's data
+		
+		let id = "ID: " + data[i].customerID;
+		let name = "Customer Name: " + data[i].customerName;
+		let email = "Customer Email: " + data[i].customerEmail;
+		let phone = "Phone: " + data[i].phoneNumber;
+
+		var p = $("<li class='list-group-item mt-4'> ").html("<h4>" +id + "<br/>"+ name + "<br/>"+ email + "<br/>"+ phone);
+
+		// Appending the paragraph and image tag to the gifDiv
+		dataDiv.append(p);
+
+		// Prependng the gifDiv to the HTML page in the "#gifs-appear-here" div
+		$("#tableList").prepend(dataDiv);
+	  }
+  });
+}
+displaygifInfo();
+	</script>
 </body>
 </html>

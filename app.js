@@ -12,7 +12,7 @@ let PORT = 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Star Wars customers (DATA)
+// Star Wars tables (DATA)
 // =============================================================
 let tables = [
   {
@@ -51,9 +51,9 @@ app.get("/reserve", function(req, res) {
 res.sendFile(path.join(__dirname, "reserve.html"));
 });
 
-// Displays all customers
+// Displays all tables
 app.get("/api/tables", function(req, res) {
-  return res.json(customers);
+  return res.json(tables);
 });
 
 // Displays a single customer, or returns false
@@ -71,7 +71,7 @@ app.get("/api/tables/:customer", function(req, res) {
   return res.json(false);
 });
 
-// Create New customers - takes in JSON input
+// Create New tables - takes in JSON input
 app.post("/api/tables", function(req, res) {
   // req.body hosts is equal to the JSON post sent from the user
   // This works because of our body parsing middleware
