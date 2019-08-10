@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hot Restaurant</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  
 </head>
 <body>
     <div class="container">
@@ -54,7 +57,7 @@
 								<input type="text" class="form-control" id="reserve_uniqueID">
 							</div>
 
-							<button type="submit" class="btn btn-primary submit">Submit</button>
+							<button id="add-btn" type="submit" class="btn btn-primary submit">Submit</button>
 						</form>
 
 					</div>
@@ -71,5 +74,24 @@
 	    </footer>
 
 	</div>
+	<script type="text/javascript">
+        // Question: What does this code do?
+        $("#add-btn").on("click", function(event) {
+          event.preventDefault();
+          var newCharacter = {
+            customerName: $("#reserve_name").val().trim(),
+            phoneNumber: $("#reserve_phone").val().trim(),
+            customerEmail: $("#reserve_email").val().trim(),
+            customerID: $("#reserve_uniqueID").val().trim()
+          };
+    
+          // Question: What does this code do??
+          $.post("/api/tables", newCharacter)
+            .then(function(data) {
+              console.log("reserve.html", data);
+              alert("Adding character...");
+            });
+        });
+      </script>
 </body>
 </html>
