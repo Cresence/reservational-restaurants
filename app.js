@@ -52,19 +52,19 @@ res.sendFile(path.join(__dirname, "reserve.html"));
 });
 
 // Displays all customers
-app.get("/api/customers", function(req, res) {
+app.get("/api/tables", function(req, res) {
   return res.json(customers);
 });
 
 // Displays a single customer, or returns false
-app.get("/api/customers/:customer", function(req, res) {
+app.get("/api/tables/:customer", function(req, res) {
   let chosen = req.params.customer;
 
   console.log(chosen);
 
-  for (let i = 0; i < customers.length; i++) {
-    if (chosen === customers[i].routeName) {
-      return res.json(customers[i]);
+  for (let i = 0; i < tables.length; i++) {
+    if (chosen === tables[i].routeName) {
+      return res.json(tables[i]);
     }
   }
 
@@ -72,7 +72,7 @@ app.get("/api/customers/:customer", function(req, res) {
 });
 
 // Create New customers - takes in JSON input
-app.post("/api/customers", function(req, res) {
+app.post("/api/tables", function(req, res) {
   // req.body hosts is equal to the JSON post sent from the user
   // This works because of our body parsing middleware
   let newcustomer = req.body;
@@ -83,7 +83,7 @@ app.post("/api/customers", function(req, res) {
 
   console.log(newcustomer);
 
-  customers.push(newcustomer);
+  tables.push(newcustomer);
 
   res.json(newcustomer);
 });
