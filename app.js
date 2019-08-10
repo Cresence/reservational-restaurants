@@ -14,7 +14,7 @@ app.use(express.json());
 
 // Star Wars customers (DATA)
 // =============================================================
-let customers = [
+let tables = [
   {
     customerName: "customer1",
     phoneNumber: "Mitch",
@@ -79,7 +79,7 @@ app.post("/api/tables", function(req, res) {
 
   // Using a RegEx Pattern to remove spaces from newcustomer
   // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
-  newcustomer.routeName = newcustomer.name.replace(/\s+/g, "").toLowerCase();
+  newcustomer.customerID = newcustomer.customerName.replace(/\s+/g, "").toLowerCase();
 
   console.log(newcustomer);
 
